@@ -3,6 +3,7 @@ PATH
   specs:
     gaargh (0.1.0)
       google-apis-iamcredentials_v1 (~> 0.17)
+      signet (~> 0.17)
 
 GEM
   remote: https://rubygems.org/

@@ -54,7 +54,7 @@ module Gaargh
       data = JSON.parse(response.body)
       expiration_time = Time.at(data['exp'].to_i)
       logger.info("Token expires at: #{expiration_time}")
-      pp data
+      logger.debug("token_info: #{data}")
       token_info = {
         token_data: data,
         token_expiration_time: expiration_time
@@ -66,7 +66,7 @@ module Gaargh
         response_code: response.code,
         response_body: response.body
       }
-      logger.info("Error retrieving token information: response.code: #{response.code}, response.body: #{response.body}")
+      logger.error("Error retrieving token information: response.code: #{response.code}, response.body: #{response.body}")
       return error_hash
     end
   end
