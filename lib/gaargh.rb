@@ -33,16 +33,13 @@ module Gaargh
     # The resource name of the service account
     service_account_resourec_name = "projects/-/serviceAccounts/#{service_account_email}"
 
-    # Check service account exists before attempting to impersonate. ClientError is raised with no other info if itdoes not.
     begin
-      creds_service.get_service_account(service_account_resourec_name)
-      logger.debug("Service account #{service_account_resourec_name} exists.")
+      impersonated_account = creds_service.generate_service_account_access_token(service_account_resourec_name, generate_token_request)
     rescue Google::Apis::ClientError => e
       logger.error("Service account #{service_account_resourec_name} does not exist or you do not have permissions.")
-      logger.error("Error: #{e}")
+      raise e
     end
 
-    impersonated_account = creds_service.generate_service_account_access_token(service_account_resourec_name, generate_token_request)
     client = Signet::OAuth2::Client.new
     client.access_token = impersonated_account.access_token
     return client
