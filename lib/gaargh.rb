@@ -30,8 +30,19 @@ module Gaargh
         lifetime: lifetime,
         scope: ['https://www.googleapis.com/auth/cloud-platform']
     )
+    # The resource name of the service account
+    service_account_resourec_name = "projects/-/serviceAccounts/#{service_account_email}"
 
-    impersonated_account = creds_service.generate_service_account_access_token("projects/-/serviceAccounts/#{service_account_email}", generate_token_request)
+    # Check service account exists before attempting to impersonate. ClientError is raised with no other info if itdoes not.
+    begin
+      creds_service.get_service_account(service_account_resourec_name)
+      logger.debug("Service account #{service_account_resourec_name} exists.")
+    rescue Google::Apis::ClientError => e
+      logger.error("Service account #{service_account_resourec_name} does not exist or you do not have permissions.")
+      logger.error("Error: #{e}")
+    end
+
+    impersonated_account = creds_service.generate_service_account_access_token(service_account_resourec_name, generate_token_request)
     client = Signet::OAuth2::Client.new
     client.access_token = impersonated_account.access_token
     return client
