@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gaargh (0.1.0)
+    gaargh (0.1.3)
       google-apis-iamcredentials_v1 (~> 0.17)
       signet (~> 0.17)
 
@@ -100,8 +100,7 @@ GEM
     webrick (1.8.1)
 
 PLATFORMS
-  x86_64-darwin-22
-  x86_64-linux
+  ruby
 
 DEPENDENCIES
   gaargh!
