@@ -59,27 +59,28 @@ bundle gem json_ruby_logger \
 --no-coc
 ```
 
-### Build the gem
+### Build and publish the gem
 
 ```bash
-  gem build json_ruby_logger.gemspec
-```
+#!/usr/bin/env bash
 
-### push the gem to rubygems.org
+set -e
 
-```bash
-  gem push json_ruby_logger-0.1.0.gem
-```
+export GEM_HOST_API_KEY="xxyyzz"
 
-## Revoke/yank a gem
+# mkdir -p "${HOME}/.gem"
+# touch "${HOME}/.gem/credentials"
+# chmod 0600 "${HOME}/.gem/credentials"
 
-```bash
-  gem yank json_ruby_logger -v 0.1.0
-```
+# echo -e "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > "${HOME}/.gem/credentials"
 
-## Bump Gem Version
+# gem install gem-release
+gem bump patch --skip-ci --push
+gem tag --push
 
-```bash
-  gem install gem-release
-  gem bump patch --skip-ci --push
+# gem yank -v "0.1.4" gaargh
+
+rm *.gem || echo "No gem to remove"
+gem build *.gemspec
+gem push *.gem
 ```
