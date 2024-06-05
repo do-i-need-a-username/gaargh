@@ -62,7 +62,6 @@ module Gaargh
       data = JSON.parse(response.body)
       expiration_time = Time.at(data['exp'].to_i)
       logger.info("Token expires at: #{expiration_time}")
-      logger.debug("token_info: #{data}")
       token_info = {
         token_data: data,
         token_expiration_time: expiration_time
