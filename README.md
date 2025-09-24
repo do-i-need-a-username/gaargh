@@ -84,3 +84,9 @@ rm *.gem || echo "No gem to remove"
 gem build *.gemspec
 gem push *.gem
 ```
+
+                        
+## Stargazers over time :joy:
+[![Stargazers over time](https://starchart.cc/do-i-need-a-username/gaargh.svg?variant=adaptive)](https://starchart.cc/do-i-need-a-username/gaargh)
+
+                    
