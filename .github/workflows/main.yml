@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Ruby ${{ steps.ruby-version.outputs.version }}
+    name: ruby build
 
     steps:
     - uses: actions/checkout@v3
