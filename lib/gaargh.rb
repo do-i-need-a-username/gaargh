@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require_relative "gaargh/version"
+require_relative 'gaargh/version'
 require 'google/apis/iamcredentials_v1'
 require 'logger'
 require 'net/http'
@@ -72,7 +72,7 @@ module Gaargh
       return token_info
     else
       error_hash = {
-        error: "Failed to retrieve token information",
+        error: 'Failed to retrieve token information',
         response_code: response.code,
         response_body: response.body
       }
