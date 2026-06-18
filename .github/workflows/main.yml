@@ -13,7 +13,7 @@ jobs:
     name: ruby build
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Extract Ruby version from gemspec
       id: ruby-version
       run: |
