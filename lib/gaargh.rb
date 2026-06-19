@@ -1,7 +1,10 @@
 # frozen_string_literal: true
-require_relative "gaargh/version"
+require_relative 'gaargh/version'
 require 'google/apis/iamcredentials_v1'
 require 'logger'
+require 'net/http'
+require 'uri'
+require 'json'
 
 module Gaargh
   class Error < StandardError; end
@@ -31,12 +34,12 @@ module Gaargh
         scope: ['https://www.googleapis.com/auth/cloud-platform']
     )
     # The resource name of the service account
-    service_account_resourec_name = "projects/-/serviceAccounts/#{service_account_email}"
+    service_account_resource_name = "projects/-/serviceAccounts/#{service_account_email}"
 
     begin
-      impersonated_account = creds_service.generate_service_account_access_token(service_account_resourec_name, generate_token_request)
+      impersonated_account = creds_service.generate_service_account_access_token(service_account_resource_name, generate_token_request)
     rescue Google::Apis::ClientError => e
-      logger.error("Service account #{service_account_resourec_name} does not exist or you do not have permissions.")
+      logger.error("Service account #{service_account_resource_name} does not exist or you do not have permissions.")
       raise e
     end
 
@@ -69,7 +72,7 @@ module Gaargh
       return token_info
     else
       error_hash = {
-        error: "Failed to retrieve token information",
+        error: 'Failed to retrieve token information',
         response_code: response.code,
         response_body: response.body
       }

@@ -1,8 +1,8 @@
-require:
+plugins:
   - rubocop-performance
 
 AllCops:
-  TargetRubyVersion: <%= RUBY_VERSION[/^\d+\.\d+/, 0] %>
+  TargetRubyVersion: 4.0
 
   # Disable all cops for now. Only notify on DeprecatedClassMethods
   DisabledByDefault: true
