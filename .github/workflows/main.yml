@@ -17,7 +17,7 @@ jobs:
     - name: Extract Ruby version from gemspec
       id: ruby-version
       run: |
-        VERSION=$(grep 'spec.required_ruby_version' gaargh.gemspec | grep -oP '(?<=>= )[^"]+' | head -1)
+        VERSION=$(grep 'spec.required_ruby_version' gaargh.gemspec | grep -oP '[\d.]+' | head -1)
         echo "version=$VERSION" >> $GITHUB_OUTPUT
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
