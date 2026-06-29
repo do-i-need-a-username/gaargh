@@ -9,6 +9,6 @@ gem 'rake', '~> 13.4'
 
 gem 'rspec', '~> 3.13'
 
-gem 'rubocop', '~> 1.60'
+gem 'rubocop', '~> 1.88'
 
 gem 'rubocop-performance'
